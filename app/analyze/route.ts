@@ -11,7 +11,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    // Securely get the backend URL from environment variables
     const backendUrl = process.env.BACKEND_API_URL;
 
     if (!backendUrl) {

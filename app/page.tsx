@@ -34,18 +34,17 @@ export default function Home() {
             setWalletAddress(accounts[0].address);
           }
 
-          // --- ADD THIS SECTION ---
-          // Listen for account changes
+
           window.ethereum.on('accountsChanged', (accounts: string[]) => {
             if (accounts.length > 0) {
               setWalletAddress(accounts[0]);
             } else {
-              // User disconnected all accounts
+
               setWalletAddress(null);
-              setContract(null); // Clear contract instance
+              setContract(null); 
             }
           });
-          // --- END OF ADDITION ---
+
 
         } catch (err) {
             console.error("Error initializing wallet connection:", err);
@@ -117,7 +116,6 @@ export default function Home() {
     setTxHash(null);
 
     try {
-      // Step 1: Call Backend for Off-Chain Analysis
       const response = await fetch("/api/analyze", {
         method: "POST",
         headers: {
@@ -133,8 +131,6 @@ export default function Home() {
 
       const data = await response.json();
       setAnalysisResult(data);
-
-      // Step 2: Initiate On-Chain Transaction
       console.log(`Submitting transaction with fee: ${analysisFee} ETH`);
       const feeInWei = ethers.parseEther(analysisFee);
       const tx = await contract.storeResultAndPay(
@@ -144,12 +140,10 @@ export default function Home() {
         { value: feeInWei }
       );
 
-      // Step 3: Wait for transaction to be mined
       await tx.wait();
       setTxHash(tx.hash);
 
     } catch (err: any) {
-      // A common error is the user rejecting the transaction
       if (err.code === 'ACTION_REJECTED') {
           setError("Transaction rejected by user.");
       } else {
@@ -279,7 +273,7 @@ export default function Home() {
                 <div className="bg-purple-50 p-4 rounded-lg">
                   <p className="font-semibold text-gray-700 mb-2">Transaction Receipt:</p>
                   <a
-                    href={`https://blockdag-explorer.io/tx/${txHash}`} // Placeholder for actual BlockDAG explorer
+                    href={`https://primordial.bdagscan.com/tx/${txHash}`} // Placeholder for actual BlockDAG explorer
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 text-purple-600 hover:text-purple-800 font-mono text-sm bg-white p-2 rounded border transition-colors"
