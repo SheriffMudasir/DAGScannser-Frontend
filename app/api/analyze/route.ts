@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Address is required' }, { status: 400 });
     }
 
-    const backendUrl = process.env.BACKEND_API_URL;
+    const backendUrl = process.env.BACKEND_API_URL || 'https://dagscannser-backend.onrender.com/api/analyze/';
     console.log("Backend URL:", backendUrl);
 
     if (!backendUrl) {

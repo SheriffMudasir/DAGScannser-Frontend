@@ -1,9 +1,3 @@
-Of course. A great README is the front door to your project. It should be inviting, informative, and make it easy for anyone to understand and run your application.
-
-Here is a robust and beautiful `README.md` for the DAGScanner frontend.
-
----
-
 # DAGScanner Frontend
 
 [![Vercel Deploy](https://vercel.com/button)](https://dagscanner.vercel.app/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
