@@ -2,13 +2,12 @@
 pragma solidity ^0.8.19;
 
 /**
- * @title DAGSurety (v2 - User-Paid)
+ * @title DAGScanner
  * @dev Stores trust scores for smart contracts on BlockDAG.
  * This version requires users to pay a small fee in BDAG to record the analysis,
- * making the system self-sustaining and more secure by moving transaction
- * initiation to the client-side.
+ * making the system self-sustaining. The core of the DAGScanner project.
  */
-contract DAGSurety {
+contract DAGScanner {
     // --- Data Structures ---
 
     struct Result {
@@ -24,7 +23,6 @@ contract DAGSurety {
 
     /**
      * @notice The fee required to store one analysis result on-chain.
-     * The frontend MUST query this value before sending a transaction.
      */
     uint256 public analysisFee;
 
@@ -51,7 +49,6 @@ contract DAGSurety {
     /**
      * @dev Sets the contract owner and the initial analysis fee upon deployment.
      * @param _initialFee The starting fee in WEI (the smallest unit of BDAG).
-     *        For example, 0.1 BDAG would be 100000000000000000 WEI.
      */
     constructor(uint256 _initialFee) {
         owner = msg.sender;
@@ -60,8 +57,7 @@ contract DAGSurety {
 
     /**
      * @notice Stores an analysis result on-chain after receiving the required fee.
-     * @dev This is a PAYABLE function. The frontend must send `analysisFee` BDAG
-     *      along with the transaction call.
+     * @dev This is a PAYABLE function. The frontend must send `analysisFee` BDAG.
      * @param _contractAddress The address of the contract being analyzed.
      * @param _score The trust score (0-100).
      * @param _status The human-readable status message.
@@ -71,16 +67,11 @@ contract DAGSurety {
         uint256 _score,
         string memory _status
     ) public payable {
-        // 1. Check if the correct payment was sent.
         require(msg.value >= analysisFee, "Payment is below the required analysis fee");
-
-        // 2. Validate the input score.
         require(_score <= 100, "Score must be 100 or less");
 
-        // 3. Store the result.
         results[_contractAddress] = Result(_score, _status, block.timestamp);
 
-        // 4. Emit the event, including the user who paid.
         emit ResultStored(_contractAddress, _score, _status, msg.sender);
     }
 
@@ -104,7 +95,7 @@ contract DAGSurety {
     }
 
     /**
-     * @notice Retrieves the stored analysis result for a contract. (No change)
+     * @notice Retrieves the stored analysis result for a contract.
      */
     function getResult(address _contractAddress)
         public
@@ -120,7 +111,7 @@ contract DAGSurety {
     }
 
     /**
-     * @notice Transfers ownership of the contract. (No change)
+     * @notice Transfers ownership of the contract to a new address.
      */
     function transferOwnership(address newOwner) external onlyOwner {
         require(newOwner != address(0), "New owner is the zero address");

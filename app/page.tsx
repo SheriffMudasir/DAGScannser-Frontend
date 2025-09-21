@@ -129,7 +129,8 @@ export default function Home() {
     setTxHash(null);
 
     try {
-      const response = await fetch("/api/analyze", {
+      // Step 1: Call Backend for Off-Chain Analysis
+      const response = await fetch("http://127.0.0.1:8000/api/analyze/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,11 +139,23 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        const errData = await response.json();
-        throw new Error(errData.error || "Failed to get analysis from the backend.");
+        let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+        try {
+          const errData = await response.json();
+          errorMessage = errData.error || errorMessage;
+        } catch {
+          // If we can't parse JSON, use the default error message
+        }
+        throw new Error(errorMessage);
       }
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error("Invalid JSON response from backend. Make sure the backend server is running correctly.");
+      }
+      
       setAnalysisResult(data);
       console.log(`Submitting transaction with fee: ${analysisFee} ETH`);
       const feeInWei = ethers.parseEther(analysisFee);
@@ -157,13 +170,18 @@ export default function Home() {
       setTxHash(tx.hash);
 
     } catch (err: unknown) {
-      const error = err as { code?: string; message?: string };
+      const error = err as { code?: string; message?: string; name?: string };
+      
       if (error.code === 'ACTION_REJECTED') {
-          setError("Transaction rejected by user.");
+        setError("Transaction rejected by user.");
+      } else if (error.name === 'TypeError' && error.message?.includes('fetch')) {
+        setError("Unable to connect to backend server. Please ensure the backend is running on http://127.0.0.1:8000");
+      } else if (error.message?.includes('CORS')) {
+        setError("Cross-origin request blocked. Please check backend CORS settings.");
       } else {
-          setError(error.message || "An unexpected error occurred.");
+        setError(error.message || "An unexpected error occurred.");
       }
-      console.error(err);
+      console.error("Analysis error:", err);
     } finally {
       setIsLoading(false);
     }
