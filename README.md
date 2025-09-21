@@ -106,8 +106,6 @@ Vercel will automatically detect the Next.js framework, build the project, and d
 
 ---
 
-Of course. Here is the information reformatted into a professional `README.md` description, suitable for a GitHub repository or technical documentation.
-
 ---
 
 # DAGScanner Smart Contract
