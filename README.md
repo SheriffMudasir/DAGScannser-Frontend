@@ -106,8 +106,6 @@ Vercel will automatically detect the Next.js framework, build the project, and d
 
 ---
 
----
-
 # DAGScanner Smart Contract
 
 The `DAGScanner` smart contract is the on-chain trust layer for the DAGScanner project. It functions as a decentralized, immutable registry for smart contract security scores on the BlockDAG network.
