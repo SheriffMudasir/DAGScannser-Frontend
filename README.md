@@ -1,16 +1,16 @@
 # DAGScanner Frontend
 
-[![Vercel Deploy](https://vercel.com/button)](https://dagscanner.vercel.app/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Vercel Deploy](https://vercel.com/button)](https://dagscanner.vercel.app/)
 
 A sleek, decentralized application for analyzing smart contract security on the BlockDAG network. DAGScanner provides an intuitive interface for users to get an off-chain, AI-powered trust score for any smart contract and then record that analysis immutably on the blockchain.
 
-**[➡️ View the Live Demo](https://dagscanner-frontend.vercel.app/)** _(Note: The live demo is connected to a test backend and the BlockDAG testnet.)_
+**[➡️ View the Live Demo](https://dag-scannser-frontend-8s6lqnt76.vercel.app/)**
 
 ---
 
 ## ✨ Core Features
 
-- **Seamless Wallet Integration:** Connect instantly and securely with MetaMask or any other EIP-1193 compatible wallet.
+- **Seamless Wallet Integration:** Connect instantly and securely with MetaMask.
 - **Off-Chain Oracle Analysis:** Leverages a powerful Python backend to perform ML-driven security analysis without bogging down the frontend.
 - **User-Centric & Decentralized Transactions:** Users pay for their own on-chain transactions, enhancing security by keeping private keys out of the backend and empowering user control.
 - **Immutable On-Chain Records:** Analysis results are stored permanently on the BlockDAG network by calling a custom smart contract.
@@ -25,7 +25,7 @@ This project is the frontend component of the DAGScanner ecosystem. It is a mode
 
 ### Technologies Used
 
-- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
 - **Blockchain Interaction:** [ethers.js v6](https://docs.ethers.org/v6/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
@@ -103,8 +103,6 @@ To deploy your own instance, simply import your forked repository into Vercel. T
 - **Value:** `https://your-live-backend-url.com/api/analyze/`
 
 Vercel will automatically detect the Next.js framework, build the project, and deploy it.
-
-> **Note:** Remember to update your backend's CORS settings to allow requests from your new Vercel deployment URL.
 
 ---
 
