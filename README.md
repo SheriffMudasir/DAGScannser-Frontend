@@ -106,6 +106,87 @@ Vercel will automatically detect the Next.js framework, build the project, and d
 
 ---
 
+Of course. Here is the information reformatted into a professional `README.md` description, suitable for a GitHub repository or technical documentation.
+
+---
+
+# DAGScanner Smart Contract
+
+The `DAGScanner` smart contract is the on-chain trust layer for the DAGScanner project. It functions as a decentralized, immutable registry for smart contract security scores on the BlockDAG network.
+
+## Core Concept: A Digital Notary Public
+
+The contract acts as a highly trusted, automated notary public that lives on the blockchain.
+
+- **Immutable Record-Keeping:** It receives an analysis result (trust score and status), verifies a fee has been paid, and permanently records the analysis with an on-chain timestamp.
+- **Publicly Verifiable:** All stored analyses are kept in a public ledger, organized by the contract address that was analyzed. This data can be read by any user or application for free.
+- **Secure and Self-Sustaining:** It enforces a payment mechanism for its service and provides secure, owner-only functions for administration and fee collection.
+
+While the backend ML model provides the _intelligence_, this smart contract provides the **permanent, verifiable proof**.
+
+---
+
+## Technical Details
+
+- **Network:** BlockDAG Testnet (Primordial)
+- **Contract Address:** `0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed`
+- **ABI:** The contract ABI is required for interaction. It can be found in the project repository (`dag_scanner_abi.json`) or generated from the source code.
+
+---
+
+## How It Works: Key Workflows
+
+### User Workflow: Storing an Analysis
+
+This is the primary flow, executed when a user wants to record an analysis on-chain.
+
+1.  **Initiate Transaction:** The user's wallet calls the `storeResultAndPay()` function with the analysis data (`_contractAddress`, `_score`, `_status`).
+2.  **Send Fee:** The user must send the required `analysisFee` (e.g., 0.1 BDAG) along with the transaction. The `payable` function modifier allows the contract to receive these funds.
+3.  **Validate Payment:** The contract's first action is to `require(msg.value >= analysisFee)`. If the payment is insufficient, the transaction fails immediately, protecting both the user and the system.
+4.  **Record Data:** Upon successful validation, the contract creates a `Result` struct and saves it to the public `results` mapping, permanently storing it on the blockchain.
+5.  **Emit Event:** The contract emits a `ResultStored` event, creating a formal, searchable log that external services can monitor.
+
+### Admin Workflow: Managing the Contract
+
+These actions can only be performed by the contract `owner`.
+
+1.  **Initiate Call:** The owner's wallet calls an administrative function like `withdraw()` or `setAnalysisFee()`.
+2.  **Verify Identity:** The `onlyOwner` modifier automatically runs a check: `require(msg.sender == owner)`. If the caller is not the owner, the transaction is rejected.
+3.  **Execute Action:**
+    - **`withdraw()`**: The contract transfers the entire balance of collected fees to the owner's wallet.
+    - **`setAnalysisFee(newFee)`**: The contract updates the public `analysisFee` variable to a new value.
+
+---
+
+## Contract Interface (Functions)
+
+#### Write Functions
+
+- `storeResultAndPay(address _contractAddress, uint256 _score, string memory _status)`
+  - **Description:** The main function for users to store an analysis result.
+  - **Access:** `public`, `payable`
+
+#### Admin Functions (Owner Only)
+
+- `withdraw()`
+  - **Description:** Withdraws the full balance of accumulated fees from the contract.
+  - **Access:** `external`, `onlyOwner`
+- `setAnalysisFee(uint256 _newFee)`
+  - **Description:** Updates the `analysisFee` required to store a result.
+  - **Access:** `external`, `onlyOwner`
+
+#### Read Functions (Free to Call)
+
+- `getResult(address _contractAddress)`
+  - **Description:** Returns the `score`, `status`, and `timestamp` for a given address.
+  - **Access:** `public`, `view`
+- `analysisFee()`
+  - **Description:** Returns the current analysis fee in WEI.
+  - **Access:** `public`, `view`
+- `owner()`
+  - **Description:** Returns the address of the contract owner.
+  - **Access:** `public`, `view`
+
 ## 📂 Project Structure
 
 A brief overview of the key directories in this project.
