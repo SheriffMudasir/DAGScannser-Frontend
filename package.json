@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint"
-  },
+  "dev": "next dev --turbopack --port 3005",
+  "build": "next build --turbopack",
+  "start": "next start -p 3005",
+  "lint": "eslint"
+},
   "dependencies": {
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
@@ -33,5 +33,3 @@
     "typescript": "^5"
   }
 }
-
-
