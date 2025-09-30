@@ -7,6 +7,7 @@ A sleek, decentralized application for analyzing smart contract security on the 
 **[➡️ View the Live Demo](https://dag-scannser-frontend.vercel.app/)**
 
 **[➡️ Pitch Deck](https://drive.google.com/file/d/1GNh8bq4LU3anI8o18Tb6tcDRY_SrKzg0/view?usp=sharing)**
+**[➡️ BEYOUND MVP](https://docs.google.com/document/d/1KvFObOpZiZde7qlObxm5a13-5aYYmPjWlN1w99dmHng/edit?usp=sharing)**
 
 ---
 
