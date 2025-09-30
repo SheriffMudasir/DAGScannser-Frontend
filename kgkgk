@@ -1,0 +1,108 @@
+Of course. The README is often the first technical document a grant committee or judge will see. It needs to be more than just a manual; it needs to be a manifesto.
+
+This rewritten README combines all three components (Frontend, Backend, Smart Contract) into a single, cohesive narrative. It's structured to impress a technical but business-minded audience like the BlockDAG committee, emphasizing the "why" and the ecosystem benefits as much as the "how."
+
+---
+
+# 🧠 Project DAGScanner: The Native Trust & Safety Layer for BlockDAG
+
+[![Vercel Deploy](https://vercel.com/button)](https://dagscanner.vercel.app/)
+
+**DAGScanner is a foundational security protocol built _for_ the BlockDAG ecosystem.** It provides a powerful, AI-driven analysis of smart contracts and anchors these "trust certifications" immutably on the BlockDAG ledger. Our mission is to make BlockDAG the most secure and transparent destination for users, developers, and capital in Web3.
+
+This is not just a utility; it is a critical piece of infrastructure designed to accelerate BlockDAG's adoption by solving the single biggest barrier: user trust.
+
+**[➡️ View the Live Demo](https://dagscanner.vercel.app/)**
+**[➡️ Read our Vision: "Beyond the MVP"](https://docs.google.com/document/d/1KvFObOpZiZde7qlObxm5a13-5aYYmPjWlN1w99dmHng/edit?usp=sharing)**
+**[➡️ View the Pitch Deck](https://drive.google.com/file/d/1GNh8bq4LU3anI8o18Tb6tcDRY_SrKzg0/view?usp=sharing)**
+
+---
+
+## ✨ A Symbiotic Partnership with BlockDAG
+
+DAGScanner is architected to create a powerful, positive feedback loop that directly benefits and drives activity on the BlockDAG network.
+
+1.  **Onboards & Protects Users:** We make it safe for new users to explore the BlockDAG ecosystem, lowering the barrier to entry and increasing user retention.
+2.  **Drives On-Chain Activity:** Every analysis is a transaction on BlockDAG, turning security into a source of network utilization and demonstrating the power of the ledger for scalable, low-cost data integrity.
+3.  **Creates a Flagship dApp:** We serve as a compelling case study for building sophisticated, AI-powered applications that leverage BlockDAG's unique technical advantages.
+4.  **Fosters a Secure Developer Ecosystem:** By providing clear security benchmarks, we encourage developers on BlockDAG to adhere to the highest standards of safety and transparency.
+
+---
+
+## 🏛️ Architecture: A Secure, Three-Tiered System
+
+Our platform is a masterclass in modern Web3 architecture, separating responsibilities to maximize security, scalability, and user experience. It consists of three distinct but interconnected components.
+
+<br>
+
+### **1. The Frontend: A Sleek Gateway to the BlockDAG Ecosystem**
+
+_(Next.js, ethers.js, Vercel)_
+
+The user's first impression and primary interaction point. It's designed to be intuitive for Web3 natives and newcomers alike.
+
+- **Seamless Wallet Integration:** Connects instantly with MetaMask, establishing a secure, client-side identity on the BlockDAG network.
+- **User-Centric Transactions:** Empowers users to control their own on-chain actions. All transactions are signed and paid for by the user, adhering to the core principles of decentralization and self-custody.
+- **Polished User Experience:** Built with Next.js 15, Tailwind CSS, and shadcn/ui for a fully responsive, modern interface that provides clear, real-time feedback.
+
+<br>
+
+### **2. The Backend: An Off-Chain AI Oracle**
+
+_(Python, Django REST Framework, Render)_
+
+The "brain" of our operation. It performs the computationally intensive analysis off-chain to keep the user experience fast and fees low.
+
+- **Secure by Design:** The backend is a stateless oracle. It holds **no private keys** and manages **no user funds**, drastically reducing its attack surface and making it inherently more secure than relay-based systems.
+- **ML-Powered Intelligence:** Leverages a pre-trained machine learning model to analyze contract addresses, providing a nuanced trust score far beyond simple checks.
+- **Scalable & Stateless:** Built on Django and deployed as a web service, it can scale independently to handle any amount of analytical requests without burdening the BlockDAG network.
+
+<br>
+
+### **3. The Smart Contract: An On-Chain Notary Public**
+
+_(Solidity, BlockDAG Testnet)_
+
+The ultimate source of truth. This is the **immutable trust layer**, where analysis results are permanently notarized on the BlockDAG ledger.
+
+- **Immutable Registry:** The contract acts as a decentralized registry, storing trust scores, statuses, and timestamps. This data is public, permanent, and censorship-resistant.
+- **Self-Sustaining Economy:** It incorporates a fee mechanism (`storeResultAndPay`) that ensures the long-term sustainability of the protocol. The collected fees can fund further development and security audits.
+- **Publicly Verifiable:** Anyone, anywhere, can query the contract for free to retrieve the analysis history of a smart contract, creating a foundational layer of public good for the entire BlockDAG ecosystem.
+- **Contract Address:** [`0x1b227DF9c8D34CaB88077473FBf426E66Ba98Ed`](https://blockdag-explorer.io/address/0x1b227DF9c8D34CaB88077473FBf426E66Ba98Ed) _(Link to BlockDAG explorer)_
+
+---
+
+## 🚀 The Workflow: From Analysis to On-Chain Proof
+
+Our system is an elegant dance between off-chain computation and on-chain settlement.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend (Next.js)
+    participant Backend (Python Oracle)
+    participant Smart Contract (BlockDAG)
+
+    User->>+Frontend: Connects Wallet & Enters Address
+    Frontend->>+Backend: POST /api/analyze/
+    Backend->>Backend: Perform ML Analysis
+    Backend-->>-Frontend: Return {score, status}
+    Frontend->>Frontend: Construct transaction with analysis data
+    Frontend->>+User: Prompt to sign & pay fee via MetaMask
+    User-->>-Smart Contract: Sends transaction (storeResultAndPay) to BlockDAG
+    Smart Contract->>Smart Contract: ✅ Validates Fee & Records Result
+    Smart Contract-->>-User: Transaction Confirmed
+    User->>Frontend: Display Success & Link to BlockDAG Explorer
+```
+
+---
+
+## 🔧 Getting Started & Deployment
+
+We are committed to open-source development to foster trust and collaboration within the BlockDAG community. Technical instructions for running each component of the stack can be found in their respective repositories:
+
+- **[➡️ Frontend Repository](https://github.com/SheriffMudasir/DAGScannser-Frontend)**
+- **[➡️ Backend Repository](https://github.com/SheriffMudasir/DAGScannser-Backend)**
+- **[➡️ Smart Contract Source](https://github.com/SheriffMudasir/DAGScannser-Smart-Contract)**
+
+This project is optimized for modern, seamless deployment on platforms like **Vercel** and **Render**, ensuring high availability and scalability from day one.
