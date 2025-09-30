@@ -5,7 +5,9 @@
 A sleek, decentralized application for analyzing smart contract security on the BlockDAG network. DAGScanner provides an intuitive interface for users to get an off-chain, AI-powered trust score for any smart contract and then record that analysis immutably on the blockchain.
 
 **[➡️ View the Live Demo](https://dag-scannser-frontend.vercel.app/)**
+
 **[➡️ Read our Vision: "Beyond the MVP"](https://docs.google.com/document/d/1KvFObOpZiZde7qlObxm5a13-5aYYmPjWlN1w99dmHng/edit?usp=sharing)**
+
 **[➡️ View the Pitch Deck](https://drive.google.com/file/d/1GNh8bq4LU3anI8o18Tb6tcDRY_SrKzg0/view?usp=sharing)**
 
 ---
